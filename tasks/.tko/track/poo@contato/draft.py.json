@@ -1,0 +1,39 @@
+{
+    "patches": [
+        {
+            "label": "2025-11-25_18-04-41",
+            "content": "@@ -149,22 +149,16 @@\n     \n-return all(cha\n+if numbe\n r in\n@@ -176,28 +176,72 @@\n 0()%22\n- for char in number)\n+:%0A            return True%0A        else:%0A            return False\n %0A   \n@@ -541,984 +541,13 @@\n one%5D\n- = %5B%5D%0A    def add_phone(self, Id:str, number:str):%0A        phone = Phone(Id, number)%0A        if not phone.is_valid(number):%0A            raise Exception(%22fail: number invalid%22)%0A        %0A        self.__phones.append(phone)%0A%0A    def rm_phone(self, index:int):%0A%0A        try:%0A            self.__phones.remove(self.__phones%5Bindex%5D)%0A%0A        except:%0A            raise Exception(%22fail: index invalid%22)%0A    def is_favorited(self):%0A        return self.__name%5B:1%5D == %220%22%0A    def toogle_favorited(self):%0A        if self.is_favorited():%0A            self.__name = self.__name%5B1:%5D%0A        else:%0A            self.__name = %22@%22 + self.__name%0A    def get_phones(self):%0A        return list(self.__phones)%0A    %0A    def get_name(self):%0A        return self.__name%0A    %0A    def set_name(self, name:str):%0A        self.__name = name%0A    def __str__(self):%0A        phones_list = %22,%22.join(str(phone) for phone in self.__phones)%0A        return f%22- %7Bself.get_name()%7D%5B%7Bphones_list%7D%5D%22  %0A%0A%0A%0Adef main()      %0A%0A\n+%0A    \n     \n",
+            "lines": "22"
+        },
+        {
+            "label": "2025-11-25_18-40-11",
+            "content": "@@ -1353,17 +1353,16 @@\n ist = %22,\n- \n %22.join(s\n@@ -1435,17 +1435,16 @@\n _name()%7D\n- \n %5B%7Bphones\n@@ -1471,746 +1471,26 @@\n in()\n-:%0A    while True:%0A        line = input()%0A        print(%22$%22+line)%0A        args:list%5Bstr%5D = line.split(%22 %22)%0A        cmd = args%5B0%5D%0A        try:%0A            match cmd:%0A                case %22end%22:%0A                    break%0A                case %22init%22:%0A                        contact = Contact(args%5B1%5D)%0A                case %22show%22:%0A                    try:%0A                        print(contact)%0A                    except:%0A                        raise Exception(%22fail: crie um contato antes%22)%0A                case %22add%22:%0A                    contact.add_phone(args%5B1%5D, args%5B2%5D)%0A                case _:%0A                    print(%22fail: comando invalido%22)%0A        except Exception as e:%0A            print(e)%0A           %0A        %0A        %0A%0A%0A%0Amain()\n+      %0A%0A    %0A        \n %0A\n",
+            "lines": "56"
+        },
+        {
+            "label": "2025-11-25_18-52-24",
+            "content": "@@ -2047,162 +2047,8 @@\n 2%5D)%0A\n-                case %22rm%22:%0A                    contact.rm_phone(int(args%5B1%5D))%0A                case %22tfav%22:%0A                    contact.toogle_favorited()%0A\n     \n",
+            "lines": "82"
+        },
+        {
+            "label": "2025-11-25_18-54-05",
+            "content": "@@ -654,38 +654,38 @@\n tion(%22fail: \n+number \n invalid\n- number\n %22)%0A        %0A\n@@ -883,20 +883,19 @@\n : in\n-valid number\n+dex invalid\n %22)%0A \n",
+            "lines": "86"
+        },
+        {
+            "label": "2025-11-25_18-54-41",
+            "content": "@@ -177,17 +177,16 @@\n 567890()\n-.\n %22 for ch\n",
+            "lines": "86"
+        },
+        {
+            "label": "2025-11-25_18-55-27",
+            "content": "@@ -510,41 +510,8 @@\n  %5B%5D%0A\n-        self.__favorited = False%0A\n     \n@@ -941,33 +941,39 @@\n turn self.__\n-favorited\n+name%5B:1%5D == %220%22\n %0A    def too\n@@ -1001,22 +1001,26 @@\n         \n+if \n self.\n-_\n+is\n _favorit\n@@ -1025,31 +1025,111 @@\n ited\n- = not self.__favorited\n+():%0A            self.__name = self.__name%5B1:%5D%0A        else:%0A            self.__name = %22@%22 + self.__name\n %0A   \n@@ -1331,17 +1331,16 @@\n (self):%0A\n-%0A\n         \n@@ -1423,45 +1423,9 @@\n n f%22\n-%7B%22@%22 if self.is_favorited() else %22-%22%7D\n+-\n  %7Bse\n@@ -1455,16 +1455,18 @@\n _list%7D%5D%22\n+  \n %0A%0A%0A%0Adef \n@@ -2339,16 +2339,36 @@\n        %0A\n+        %0A        %0A%0A%0A\n %0Amain()%0A\n",
+            "lines": "86"
+        },
+        {
+            "label": "2025-11-25_19-02-23",
+            "content": "class Phone:\n    def __init__ (self, Id:str, number:str):\n        self.__Id = Id\n        self.__number = number\n    def is_valid(self, number):\n        return all(char in \"1234567890().\" for char in number)\n    def get_id(self):\n        return self.__Id\n    def get_number(self):\n        return self.__number\n    def __str__(self):\n        return f\"{self.get_id()}:{self.get_number()}\"\n    \nclass Contact:\n    def __init__(self, name:str = \"\"):\n        self.__name = name\n        self.__phones : list[Phone] = []\n        self.__favorited = False\n    def add_phone(self, Id:str, number:str):\n        phone = Phone(Id, number)\n        if not phone.is_valid(number):\n            raise Exception(\"fail: invalid number\")\n        \n        self.__phones.append(phone)\n\n    def rm_phone(self, index:int):\n\n        try:\n            self.__phones.remove(self.__phones[index])\n\n        except:\n            raise Exception(\"fail: invalid number\")\n    def is_favorited(self):\n        return self.__favorited\n    def toogle_favorited(self):\n        self.__favorited = not self.__favorited\n    def get_phones(self):\n        return list(self.__phones)\n    \n    def get_name(self):\n        return self.__name\n    \n    def set_name(self, name:str):\n        self.__name = name\n    def __str__(self):\n\n        phones_list = \", \".join(str(phone) for phone in self.__phones)\n        return f\"{\"@\" if self.is_favorited() else \"-\"} {self.get_name()} [{phones_list}]\"\n\n\n\ndef main():\n    while True:\n        line = input()\n        print(\"$\"+line)\n        args:list[str] = line.split(\" \")\n        cmd = args[0]\n        try:\n            match cmd:\n                case \"end\":\n                    break\n                case \"init\":\n                        contact = Contact(args[1])\n                case \"show\":\n                    try:\n                        print(contact)\n                    except:\n                        raise Exception(\"fail: crie um contato antes\")\n                case \"add\":\n                    contact.add_phone(args[1], args[2])\n                case \"rm\":\n                    contact.rm_phone(int(args[1]))\n                case \"tfav\":\n                    contact.toogle_favorited()\n                case _:\n                    print(\"fail: comando invalido\")\n        except Exception as e:\n            print(e)\n           \n\nmain()\n",
+            "lines": "81"
+        }
+    ]
+}
